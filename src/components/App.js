@@ -27,19 +27,19 @@ class App extends React.Component {
     if (this.state.filters.type === 'all'){
       fetch('/api/pets')
       .then(resp => resp.json())
-      .then(pets => console.log(pets))
+      .then(pets => this.setState({pets: [...pets]}))
     } else if (this.state.filters.type === 'cat') {
       fetch('/api/pets?type=cat')
       .then(resp => resp.json())
-      .then(pets => console.log(pets))
+      .then(pets => this.setState({pets: [...pets]}))
     } else if (this.state.filters.type === 'dog') {
       fetch('/api/pets?type=dog')
       .then(resp => resp.json())
-      .then(pets => console.log(pets))
+      .then(pets => this.setState({pets: [...pets]}))
     } else if (this.state.filters.type === 'micropig') {
       fetch('/api/pets?type=micropig')
       .then(resp => resp.json())
-      .then(pets => console.log(pets))
+      .then(pets => this.setState({pets: [...pets]}))
     }
   }
 
@@ -55,7 +55,7 @@ class App extends React.Component {
               <Filters handleFiltersType={this.onChangeType} handleFindPets={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets}/>
             </div>
           </div>
         </div>
