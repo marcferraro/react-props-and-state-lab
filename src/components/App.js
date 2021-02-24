@@ -43,6 +43,29 @@ class App extends React.Component {
     }
   }
 
+  onAdoptPet = (id) => {
+    // console.log(id)
+    // const pet = this.state.pets.find(pet => pet.id === id)
+    // pet.isAdopted = true
+    // console.log(pet.isAdopted)
+
+    const newPetsArray = this.state.pets.map(petObj => {
+      if (petObj.id === id){
+        return {
+          ...petObj,
+          isAdopted: true
+        }
+      } else {
+        return petObj
+      }
+    })
+
+    this.setState({
+      pets: newPetsArray
+    })
+
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -52,10 +75,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters handleFiltersType={this.onChangeType} handleFindPets={this.onFindPetsClick}/>
+              <Filters onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick}/>
             </div>
             <div className="twelve wide column">
-              <PetBrowser pets={this.state.pets}/>
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.onAdoptPet}/>
             </div>
           </div>
         </div>
